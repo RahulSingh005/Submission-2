@@ -1,0 +1,101 @@
+<!-- views/home.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Schedule</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui;
+            margin: 0;
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .schedule-table th {
+            background: var(--primary);
+            color: white;
+        }
+
+        .match-link {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .competition {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .schedule-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚽ Football Match Schedule</h1>
+            <p>Updated: <%= currentDate %></p>
+        </div>
+
+        <table class="schedule-table">
+            <thead>
+                <tr>
+                    <th>Date & Time</th>
+                    <th>Match</th>
+                    <th>Competition</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% matches.forEach(match => { %>
+                    <tr>
+                        <td><%= formatDate(match.date) %></td>
+                        <td>
+                            <a href="<%= match.matchviewUrl %>" 
+                               class="match-link"
+                               target="_blank">
+                                <%= match.title %>
+                            </a>
+                        </td>
+                        <td class="competition"><%= match.competition %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
