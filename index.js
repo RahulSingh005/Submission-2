@@ -4,7 +4,7 @@ const axios = require('axios');
 const app = express();
 
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+app.set('views', path.join(__dirname, 'views'));
 
 const SCOREBAT_API = 'https://www.scorebat.com/video-api/v3/feed/';
 const API_TOKEN = process.env.API_KEY;
